@@ -1,0 +1,1662 @@
+---
+title: "Hotspots_report"
+author: "Paulo Manrique, Ashley Farley, Brooke Whittemore, Lindsey Wu,  Lisa Prach, Henry Ntuku, Jenny Smith, Adam Bennett, Munyaradzi Tambo, Allison Golden, Inh Kyung Jang, Gonzalo Domingo, Bryan Greenhouse, Petrina Uusiku, Chris Drakeley, Immo Kleinschmidt, Davis Mumbengegwi, Roly Gosling, Michelle S. Hsiang."
+date: "September 21th, 2020"
+output:
+  html_document: default
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = TRUE)
+```
+
+# Performance evaluation of standard and ultra-sensitive malaria rapid diagnostic tests to detect hotspots of Plasmodium falciparum transmission in the low endemic setting of Zambezi Region, Namibia.
+
+## Background: (**TBD**)
+
+## Objective:
+
+To compare the performance of Ultra sensitive rapid diagnostic test (**uRDT**) and rapid diagnostic test (**RDT**) in detecting *Plasmodium falciparum* transmission hotspots at enumeration area level (or **eaid**) and household (**hhid**) and household (**hhid**).
+
+## Methods:
+
+The study population included individuals residing within the catchment areas of eleven health facilities in western Zambezi Region (**Fig. 2**). Specifically, 56 of 102 census enumeration areas (**eaid**s) in the region were initially included based on reliability of incidence data from 2012 to 2014 and presence of incident cases during that time. **eaid**s with large geographical size and having more than 2 borders with other contiguous **eaid**s were dropped (**Fig. 1 and Fig. 2**). For the household level data (**hhid**), inclusion criteria included residence in randomly selected households or boarding schools within one of the **eaid**s with around 25 households selected per **eaid**. For individuals residing within the household (**iid**), inclusion criteria included head of household consent, and age greater than six months. Exclusion criteria included not having slept in the household or boarding school at least three nights per week in the previous four weeks and refusal to participate.
+
+```{r, echo=FALSE, fig.align= "center", fig.height=20, fig.width=10}
+knitr::include_graphics("flow_chart.jpg")
+```
+<p style="font-size:8pt; font-style:italic">**Figure 1:** Study design flowchart and criteria for hotspot definition.</p>
+
+```{r, echo=FALSE}
+knitr::include_graphics("namibia_map_with_hatches_v2.jpg")
+```
+<p style="font-size:8pt; font-style:italic">**Figure 2:** Study site map.</p>
+
+### Field procedures:
+Questionnaires were administered to consenting subjects from selected households and schools using tablet computers and blood testing and collection was conducted. A household level questionnaire captured geolocation, household population, insecticide-treated bed net ownership, and indoor residual spray coverage. The individual level questionnaire captured demographic data. In addition, axillary temperature of each participant was measured and recorded. Written individual informed consent was obtained from adults, parental consent was obtained for children under 18 years old, and adolescent assent was obtained from minors 12-17 years old. To enroll as many individuals as possible, all households and schools were visited twice. Surveys were conducted in the local language of siLozi. A trained study nurse collected whole blood for malaria testing using a finger prick for each individual in the cross-sectional analysis.
+
+### Laboratory or testing methods:
+The collected blood was used to assess the presence of current or recent infection of parasites causing Malaria using 1) the rapid diagnostic test (**RDT**) CareStartTM Malaria HRP2/pLDH (Pf/PAN) Combo test (AccessBio, Somerset, NJ, USA); 2) the Alere Malaria Ag P.f RDT Ultra Sensitive (SD/Alere, Yongin-si, Republic of Korea) (**uRDT**); 3) a quantitative real-time polymerase chain reaction (**qPCR**); 4) and the Q-plex ELISA method for HRP2 quantification (**HRP2**). The realization of **RDT** and **uRDT** was done following the manufacturers instructions. Whole blood collected in the cross-sectional survey was centrifuged, and packed red blood cells were stored at -20°C before undergoing DNA extraction using the Quick-DNATMminiprep kit (Zymo Research Corp, Irvine, CA, USA) and a qPCR targeting the varATS region28using template DNA corresponding to 10 μL of whole blood. Samples were considered **qPCR** positive if parasite density was greater than 0.1 p/μL. **HRP2** concentration was determined using the Q-plex ELISA. All parasite density estimates for this study were determined by averaging duplicate runs by qPCR and described in p/μL. Samples were considered Q-plex **HRP2** positive if **HRP2** concentration was greater than the Q-plex assay LOD of 2.3 pg/mL.
+
+### Statistical analysis:
+
+Individual demographic information (**iid**, **hhid**, **eaid** and others), and the laboratory results of the performed diagnostic tests (positive and negative for the four test performed) were entered and stored in .dta format in STATA (version 13; STATA Corp., College Station, TX, USA) and then analyzed in R version 4.0.1 (R Foundation for Statistical Computing., Vienna, Austria). To evaluate the performance of **RDT**s and **uRDT**s in detecting hotspots, data was collapsed at enumeration area (**eaid**) and household (**hhid**) level.
+
+At **eaid** level incidence data (cases/1000 person years) was obtained by passive case detection through **RDT** and **microscopy** for patients who presented at health facilities during the broader trial study period. Each positive case was documented along with the individual’s **eaid**. Prevalence by **HRP2** and **qPCR** (reference tests), and by **RDT**s and **uRDT**s in each eaid was also measured for all participants. **eaid**s were classified as hotspots based on 6 Criteria: **1)** being in the top quartile of HRP2 prevalence, or having a qPCR prevalence above 10%, or an incidence above 50 cases/1000 persons years; **2)** being in the top quartile for any of the three metrics mentioned previously; **3)** using a hierarchical clustering method to classify the eaids based on their **incidence** and their prevalence by **HRP2** and **qPCR** tests; **4)** being in the top quartile of the incidence; **5)** being in the top quartile of the HRP prevalence; and **6)** being in the top quartile of the qPCR prevalence (**Fig. 1**).
+
+For the hierarchical clustering analysis, the best distance (*euclidean*, *manhattan*, *canberra*, *binary*, and *minkowski*) and the best agglomerative (*ward.D*, *ward.D2*, *single*, *complete*, *average*, and *mcquitty*) methods were selected based on the maximization of the agglomerative coefficient. The optimum number of clusters was evaluated from *k* = 2 to 15,  and the best value of *k* was selected based on the minimization of the SD index (sum of the scattering within clusters and distance between clusters) proposed by Halkidi et al. 2000. Results were shown ussing a clustered heatmap, and the **eaid**s belonging to the clusters with the highest incidence and prevalence that comprise the 75th quartile of the total **eaid**s were defined as hotspots.
+
+At household level the number of screened iids and infected iids per house was counted by each test (**HRP2**, **qPCR**, **RDT**s and **uRDT**s), and hotspots households were defined based on three criteria: **1)** the number of individuals detected infected by **HRP2** (grater than 2 infected **iid**s in the household) or by **qPCR** (grater than 1 infected **iid**s in the household) tests; **2)** the number of individuals detected infected by **HRP2** (grater than 2 infected **iid**s in the household) test; and **3)** the number of individuals detected infected by **qPCR** (grater than 1 infected **iid**s in the household) test (**Fig. 1**).
+
+Performance of **RDT**s and **uRDT**s as predictors for hotspots was assessed by an empirical receiver operating characteristic (ROC) curve analysis implemented in the R package pROC. Two-sided 95% confidence intervals for the area under the curve (**AUC**) were measured base on DeLong method and the selection of the best threshold for predicted variables (prevalence by **RDT**s and **uRDT**s) was defined by the maximization of Youden index and its two-sided 95% confidence intervals were determined using an stratified bootstrap with 10,000 samples. Sensitivity, Positive and Negative predicted values and accuracy were also measured for a fixed specificity at 85%, and their two-sided 95% confidence intervals were estimated using the Wilson score method implemented in the Hmisc R package. Statistical differences in the areas under the curves between the different tests (**RDT**s vs **uRDT**s) were assessed by a DeLong test and their corresponding statistical power was calculated.
+```{r include = FALSE}
+source("Required_packages.R")
+source("fx_roc_curve.R")
+
+# Upload data with read.dta13----
+Namibia_iid_df<-read.dta13("uRDT_analysis_BW_4146.dta", nonint.factors= T) # import uRDT data base, nonint.factors = T allows to import variable labels (some variables were stored as floats in stata)
+Namibia_eaid_df<-read.dta13("EA_level_dataset_56.dta") # import ea data base
+
+# tibble data.frame by iid and eaid---- 
+
+# iid_df: ----
+# long format tbbile data.frame for iid`s`, just some variables will be used in order to facilitate its processing
+iid_df <- Namibia_iid_df[c("iid", "hhid", "eaid",
+                           "age", "gender", "hrp2_posneg",
+                           "qPCRposneg", "rdtresult_posneg",
+                           "hsrdtresult")]
+
+names(iid_df) <- c(names(iid_df[1:5]),"HRP2","qPCR","RDT","uRDT") # rename tests
+
+test<-c("HRP2","qPCR","RDT","uRDT")
+iid_df <- as_tibble(iid_df) # convert to tibble
+
+# convert to long format
+iid_df %<>% pivot_longer(all_of(test),# define the varibles that will be converted to long format
+                         names_to = "test",# asing a new variable named "test" where the categorical information is going to be stored
+                         values_to = "result")# asign a new varieble named "result" where the result of each test is going to be stored
+
+iid_df[iid_df[["hhid"]] == "XSHH0855" & iid_df[["eaid"]] == "10699004",][["hhid"]]<-"XSHH0856" # Change the name of a repeated hhid code
+
+# convert all columns except "age" to a factor
+for (i in names(iid_df[names(iid_df) != "age"])){
+  iid_df[[i]] <- as.factor(as.character(iid_df[[i]]))
+  rm(i)
+}
+
+iid_df %<>% filter(eaid != "10499014",
+                  eaid != "10699016",
+                  eaid != "10599010",
+                  eaid != "10599056")
+
+positive_iids <- list(HRP2 = iid_df[iid_df[["test"]] == "HRP2" & iid_df[["result"]] == "Positive",][["iid"]],
+                      qPCR = iid_df[iid_df[["test"]] == "qPCR" & iid_df[["result"]] == "Positive",][["iid"]],
+                      RDT = iid_df[iid_df[["test"]] == "RDT" & iid_df[["result"]] == "Positive",][["iid"]],
+                      uRDT = iid_df[iid_df[["test"]] == "uRDT" & iid_df[["result"]] == "Positive",][["iid"]])
+
+iid_VennD <- ggVennDiagram(positive_iids, label = "count")
+
+# hhid_df:----
+# Number of iid screened and iid infected per house by test
+hhid_df <- iid_df %>% # data take it from iid_df
+  group_by(hhid, test, result) %>% 
+  summarise(
+    eaid = levels(as.factor(as.character(eaid))),
+    n.iid = nlevels(as.factor(as.character(iid)))) %>% # new variable "n.iid": number of iids per each category
+  pivot_wider(names_from = result, values_from = n.iid) %>% # convert to wide format to sum Negative and Positive results per hhid
+  mutate(scr.iid = sum(c(Negative, Positive), na.rm = T), # count the number of screened iid
+         inf.iid = sum(Positive, na.rm = T))%>% # count the number of
+  select(hhid,eaid,test, scr.iid, inf.iid)
+
+hhid_wdf <- hhid_df %>% pivot_wider(names_from = test, values_from = inf.iid)
+
+# Calculate the number of of hhid with infected indv per eaid detected by Test
+eaid_c.hh_df<-hhid_df%>%
+  group_by(eaid, test) %>%
+  summarise(n.cases.hh = levels(as.factor(inf.iid)),
+            nhhid.eaid = sum(summary(as.factor(inf.iid))),
+            n.hh = summary(as.factor(inf.iid)),
+            freq = summary(as.factor(inf.iid))/length(inf.iid)
+  )
+
+eaid_c.hh_df%<>%pivot_wider(names_from = n.cases.hh, values_from = c(freq,n.hh))
+
+for (i in names(eaid_c.hh_df[-1:-2])){
+  eaid_c.hh_df[is.na(eaid_c.hh_df[[i]]),][[i]]<-0
+}
+
+eaid_c.hh_df2<-eaid_c.hh_df%>%pivot_longer(names(eaid_c.hh_df)[grepl("n.hh",names(eaid_c.hh_df))], names_to = "n.cases.hh", values_to = "n.hh")
+eaid_c.hh_df2$n.cases.hh<-gsub("n.hh_","",eaid_c.hh_df2$n.cases.hh)
+eaid_c.hh_df3<-eaid_c.hh_df%>%pivot_longer(names(eaid_c.hh_df)[grepl("freq",names(eaid_c.hh_df))], names_to = "n.cases.hh", values_to = "freq")
+
+eaid_c.hh_df<-cbind(eaid_c.hh_df2[-4:-11],eaid_c.hh_df3[13])
+eaid_c.hh_df$eaid<-as.factor(eaid_c.hh_df$eaid)
+
+# proportion of hhid with more tham 1 iid inf.----
+eaid_pr.hh.iniid_df = NULL
+
+for (x in levels(hhid_df$test)){
+  temp<-tibble("test"=x)
+  for (n in levels(as.factor(hhid_df$eaid))){
+    temp[["eaid"]]<-n
+    for(m in 1:4){
+    temp[["n.inf.hh"]]<-m
+    temp[["Proportion"]]<-(nrow(hhid_df[hhid_df[["eaid"]]==n &
+                                          hhid_df[["test"]]==x &
+                                          hhid_df[["inf.iid"]]>=m,])/nrow(hhid_df[hhid_df[["eaid"]]==n&
+                                                                                    hhid_df[["test"]]==x,]))
+    eaid_pr.hh.iniid_df<-rbind(eaid_pr.hh.iniid_df,temp)
+    }
+  }
+  rm(list= c("x","n","m"))
+}
+
+eaid_pr.hh.iniid_df$test<-as.factor(eaid_pr.hh.iniid_df$test)
+eaid_pr.hh.iniid_df$n.inf.hh<-as.factor(eaid_pr.hh.iniid_df$n.inf.hh)
+# eaid_df: ----
+#long format tbbile data.frame for eaid`s, just some variables will be used in order to facilitate its processing
+eaid_df <- Namibia_eaid_df[c("ea_no","ea_pop_update","ea_local_cases_post_8wks","ea_incidence_rate")]
+eaid_df <- as_tibble(eaid_df) # convert to a tibble
+names(eaid_df) <- c("eaid", "popsize", "cases_8wks", "Incidence")# variables are renamed in order to facilitate its processing
+
+eaid_df %<>% filter(eaid != "10499014",
+                  eaid != "10699016",
+                  eaid != "10599010",
+                  eaid != "10599056")
+
+eaid_df$eaid <- as.factor(eaid_df$eaid) # convert the variable eaid to a factor
+
+# calculate the number of iid`s screened by eaid 
+eaid_df <- iid_df %>% # Pick information from ii_df and store it into eaid_df
+  group_by(eaid) %>% # group information by eaid
+  summarise(samsize = nlevels(as.factor(as.character(iid))),
+            nhhid = nlevels(as.factor(as.character(hhid)))) %>% # summarise the number of iid`s per eaid and store that information in a varibale named samsize
+  full_join(eaid_df, by = "eaid") # joint the new variable samsize with the information in eaid_df
+
+eaid_df[is.na(eaid_df[["Incidence"]]),][["Incidence"]] <-
+  hmean(eaid_df[!is.na(eaid_df[["Incidence"]]) & eaid_df[["Incidence"]] != 0,][["Incidence"]])
+
+# calculate prevalence ---- 
+
+prev_df <- NULL
+
+for (i in levels(iid_df$eaid)){
+  temp <- tibble("eaid" = i)
+  for (j in levels(as.factor(as.character(iid_df[iid_df[["eaid"]] == i,][["test"]])))){
+    temp[["test"]] <- j
+    temp[["ncases"]] <-nlevels(
+      as.factor(
+        as.character(
+          iid_df[iid_df[["eaid"]] == i &
+                   iid_df[["test"]] == j &
+                   iid_df[["result"]] == "Positive",][["iid"]])))
+    temp[["prev"]] <-100*(nlevels(
+      as.factor(
+        as.character(
+          iid_df[iid_df[["eaid"]] == i &
+                   iid_df[["test"]] == j &
+                   iid_df[["result"]] == "Positive",][["iid"]]))))/eaid_df[eaid_df[["eaid"]] == i,][["samsize"]]
+    prev_df <- rbind(prev_df,temp)
+      
+  }
+  rm(list = c("temp", "i", "j"))
+  }
+
+for (i in paste0("cases", sep = ".", levels(as.factor(prev_df$test)))){
+  eaid_df[[i]]<-as.numeric(NA)  
+  rm(i)
+}
+
+for (i in paste0("prev", sep = ".", levels(as.factor(prev_df$test)))){
+  eaid_df[[i]]<-as.numeric(NA)
+  rm(i)
+}
+
+for (i in levels(eaid_df$eaid)){
+  for (j in  levels(as.factor(prev_df$test))){
+    eaid_df[eaid_df[["eaid"]] == i,][[paste0("cases", sep = ".", j)]] <- prev_df[prev_df[["eaid"]] == i & prev_df[["test"]] == j,][["ncases"]]
+    eaid_df[eaid_df[["eaid"]] == i,][[paste0("prev", sep = ".", j)]] <- prev_df[prev_df[["eaid"]] == i & prev_df[["test"]] == j,][["prev"]]
+  }
+  rm(list = c("i", "j"))
+}
+
+# add proportions of hhids with inf. iids ----
+
+prop.names <- as.factor(mapply(function (x, y) paste("prop",x,y , sep = "."),
+                              crossing(levels(eaid_pr.hh.iniid_df$test),
+                                       levels(eaid_pr.hh.iniid_df$n.inf.hh))[1],
+                              crossing(levels(eaid_pr.hh.iniid_df$test),
+                                       levels(eaid_pr.hh.iniid_df$n.inf.hh))[2]))
+
+for (i in levels(prop.names)){
+  eaid_df[[i]]<-as.numeric(NA)
+  rm(i)
+}
+
+for (i in levels(eaid_df$eaid)){
+  for (j in  levels(as.factor(eaid_pr.hh.iniid_df$test))){
+    for (k in levels(as.factor(eaid_pr.hh.iniid_df$n.inf.hh))){
+      eaid_df[eaid_df[["eaid"]] == i,][[paste("prop", j, k, sep = ".")]] <- 
+        eaid_pr.hh.iniid_df[eaid_pr.hh.iniid_df[["eaid"]] == i &
+                              eaid_pr.hh.iniid_df[["test"]] == j &
+                              eaid_pr.hh.iniid_df[["n.inf.hh"]] == k,][["Proportion"]]
+    }
+  }
+  rm(list = c("i", "j", "k"))
+}
+
+#defining hotspots at eaid level----
+# Criterion 1----
+eaid_df <- mutate(eaid_df, Criterion1 = case_when(
+  prev.HRP2 < quantile(eaid_df$prev.HRP2, probs = .75, na.rm = T)[1] &
+    Incidence < 50 &
+    prev.qPCR < 10 ~ "no",
+  prev.HRP2 >= quantile(eaid_df$prev.HRP2, probs = .75, na.rm = T)[1] |
+    Incidence >= 50 |
+    prev.qPCR >= 10 ~ "yes"
+))
+
+# Criterion 2----
+eaid_df <- mutate(eaid_df, Criterion1.2 = case_when(
+  prev.HRP2 < quantile(eaid_df$prev.HRP2, probs = .75, na.rm = T)[1] &
+    Incidence < quantile(eaid_df$Incidence, probs = .75, na.rm = T)[1] &
+    prev.qPCR < quantile(eaid_df$prev.qPCR, probs = .75, na.rm = T)[1] ~ "no",
+  prev.HRP2 >= quantile(eaid_df$prev.HRP2, probs = .75, na.rm = T)[1] |
+    Incidence >= quantile(eaid_df$Incidence, probs = .75, na.rm = T)[1] |
+    prev.qPCR >= quantile(eaid_df$prev.qPCR, probs = .75, na.rm = T)[1] ~ "yes"
+))
+
+# Criterion 5----
+eaid_df <- mutate(eaid_df, Criterion1.HRP2 = case_when(
+  prev.HRP2 < quantile(eaid_df$prev.HRP2, probs = .75, na.rm = T)[1]  ~ "no",
+  prev.HRP2 >= quantile(eaid_df$prev.HRP2, probs = .75, na.rm = T)[1] ~ "yes"
+))
+
+# Criterion 4----
+eaid_df <- mutate(eaid_df, Criterion1.Incidence = case_when(
+  Incidence < quantile(eaid_df$Incidence, probs = .75, na.rm = T)[1] ~ "no",
+  Incidence >= quantile(eaid_df$Incidence, probs = .75, na.rm = T)[1] ~ "yes"
+))
+
+# Criterion 6----
+eaid_df <- mutate(eaid_df, Criterion1.qPCR = case_when(
+  prev.qPCR < quantile(eaid_df$prev.qPCR, probs = .75, na.rm = T)[1] ~ "no",
+  prev.qPCR >= quantile(eaid_df$prev.qPCR, probs = .75, na.rm = T)[1] ~ "yes"
+))
+
+### Criterion 3: Clustered dendrogram----
+
+HClust.Analysis <- fx_HClust.Analysis(data = eaid_df,
+                                      names.variables = c("Incidence","prev.HRP2","prev.qPCR"),
+                                      names.rows = "eaid",
+                                      distance = "auto",
+                                      method = "auto",
+                                      NbC.index = "sdindex")
+
+par(mfcol = c(1,1), mfrow = c(1,1))
+
+clusters <- cutree(HClust.Analysis$h.clust, k=3)
+dd.samp <- as.dendrogram(HClust.Analysis$h.clust)
+set.seed(2)
+dd.samp2 <- reorder(dd.samp, (sample(names(clusters[clusters==2]),1): sample(names(clusters[clusters==3]),1)))
+
+clusters <- cutree(HClust.Analysis$h.clust, k=6)
+Clust.Heatmap.Plots <-fx_HClust.Heatmap(data = eaid_df,
+                  names.variables = c("Incidence","prev.HRP2","prev.qPCR"),
+                  names.rows = "eaid",
+                  dendrogram = dd.samp2,
+                  clusters = clusters)
+
+# define hotspots
+eaid_df %<>% mutate(Criterion2 = case_when(eaid %in% unlist(Clust.Heatmap.Plots$dendro$labels %>% filter(x<=15) %>% select(label)) ~ "yes",
+                                          !(eaid %in% unlist(Clust.Heatmap.Plots$dendro$labels %>% filter(x<=15) %>% select(label))) ~ "no"))
+
+# performance at eaid level all criteria----
+eaid_roc_analysis <- fx_roc_analysis2(response = c("Criterion1","Criterion1.HRP2",
+             "Criterion1.Incidence", "Criterion1.qPCR",
+             "Criterion2", "Criterion1.2"),
+                 predictors = c("prev.uRDT",
+                                "prev.RDT"),
+                 data = eaid_df,
+                 ci.method = "delong",
+                 boot.n = 10000,
+                 boot.stratified = T,
+                 best.method = "youden",
+                 conf.level = .95,
+             x = .85,
+             input = "spec")
+
+# hhid level analysis----
+
+hhid_df2<-hhid_df %>% filter(scr.iid >= 2 & scr.iid < 20)
+
+hhid_wdf2 <- hhid_df2 %>% pivot_wider(names_from = test, values_from = inf.iid)
+hhid_wdf2 %<>% mutate(hh_hotspots1 = case_when(
+  HRP2 < 2 & qPCR <1 ~ "no",
+  HRP2 >= 2 | qPCR >= 1 ~ "yes"),
+  hh_hotspots2 = case_when(
+  HRP2 < 2 ~ "no",
+  HRP2 >= 2 ~ "yes"),
+  hh_hotspots3 = case_when(
+  qPCR <1 ~ "no",
+  qPCR >= 1 ~ "yes")
+  )
+
+hhid_df2<-full_join(hhid_df2, hhid_wdf2[c("hhid", "hh_hotspots1", "hh_hotspots2", "hh_hotspots3")], by = "hhid")
+
+# # number of infected invd per hhid`s by eaid----
+# 
+# # Calculate the number of of hhid with infected indv per eaid detected by Test
+# 
+eaid_c.hh_df2<-hhid_df2%>%
+  group_by(eaid, test) %>%
+  summarise(n.cases.hh = levels(as.factor(inf.iid)),
+            nhhid.eaid = sum(summary(as.factor(inf.iid))),
+            n.hh = summary(as.factor(inf.iid)),
+            freq = summary(as.factor(inf.iid))/length(inf.iid)
+  )
+
+eaid_c.hh_df2%<>%pivot_wider(names_from = n.cases.hh, values_from = c(freq,n.hh))
+
+for (i in names(eaid_c.hh_df2[-1:-2])){
+  eaid_c.hh_df2[is.na(eaid_c.hh_df2[[i]]),][[i]]<-0
+}
+
+eaid_c.hh_df3<-eaid_c.hh_df2%>%pivot_longer(names(eaid_c.hh_df2)[grepl("n.hh",names(eaid_c.hh_df2))], names_to = "n.cases.hh", values_to = "n.hh")
+eaid_c.hh_df3$n.cases.hh<-gsub("n.hh_","",eaid_c.hh_df3$n.cases.hh)
+eaid_c.hh_df4<-eaid_c.hh_df2%>%pivot_longer(names(eaid_c.hh_df2)[grepl("freq",names(eaid_c.hh_df2))], names_to = "n.cases.hh", values_to = "freq")
+
+eaid_c.hh_df2<-cbind(eaid_c.hh_df3[-4:-11],eaid_c.hh_df4[13])
+eaid_c.hh_df2$eaid<-as.factor(eaid_c.hh_df2$eaid)
+
+# performance at hhid level----
+hhid_roc_analysis<- fx_roc_analysis2(response = c("hh_hotspots1", "hh_hotspots2", "hh_hotspots3"),
+                 predictors = c("uRDT", "RDT"),
+                 data = hhid_wdf2,
+                 ci.method = "delong",
+                 boot.n = 10000,
+                 boot.stratified = T,
+                 best.method = "youden",
+                 conf.level = .95)
+
+```
+
+## Results:
+
+### Study sample and tests results
+
+Fifty-two out of the 56 **eaid**s meet the inclusion criteria, and along these **eaid**s 3699 individuals or **iid**s (in 1011 households or **hhid**s) where screened by **RDT**, **uRDT**, **qPCR** and **HRP2** tests (**Sup. Table 1**). A median of 63.5 **iid**s (IQR = 39.2, range from 25 to 150) and 18 **hhid**s (IQR = 7.25, range from 7 to 36) were screened in the 52 **eaid**s, and a median of 3 **iid**s (IQR = 3, range from 1 to 73) were screened per **hhid** (**Fig. 3** and **ST2**). Three hundred seventy five individuals were positive for any of the 4 test performed (278 for **HRP2**, 134 for **qPCR**, 89 for **RDT**s and 111 for **uRDT**s) (**ST3**), and 246 households had positive individuals for any of these tests (204 by the **HRP2**, 87 by **qPCR**, 76 by **RDT**s, and 92 households by **uRDT**s) (**ST3**).
+```{r include = FALSE}
+# Summary table with the number of iids, hhids, eaids and arms ----
+stbl1<-iid_df %>% summarise(niid = nlevels(as.factor(as.character(iid))),#3699 individuals
+                     nhhid = nlevels(as.factor(as.character(hhid))),#1011 households
+                     neaid = nlevels(as.factor(as.character(eaid)))#52 study areas
+                     )
+
+stbl2<-rbind(tibble(test = "iid/eaid", eaid_df %>% summarise(median = median(samsize), # median of individuals screenned by household 
+            IQR = IQR(samsize),
+            min = min(samsize),
+            max = max(samsize))),
+tibble(test = "hhid/eaid", eaid_df %>% summarise(median = median(nhhid), # median of individuals screenned by household 
+            IQR = IQR(nhhid),
+            min = min(nhhid),
+            max = max(nhhid))),
+tibble(test = "iid/hhid", hhid_df %>% filter(test == "HRP2")%>%ungroup()%>%
+  summarise(median = median(scr.iid), # median of individuals screenned by household 
+            IQR = IQR(scr.iid),
+            min = min(scr.iid),
+            max = max(scr.iid))))
+# Number of Positive iids and hhids by test ----
+stbl3 <- full_join(rbind(tibble(test = "Total",(iid_df%>%
+  pivot_wider(names_from = test, values_from = result)%>%
+  mutate(result = case_when(
+    HRP2 == "Positive" | qPCR == "Positive" | RDT == "Positive" | uRDT == "Positive" ~ "Positive",
+    HRP2 == "Negative" & qPCR == "Negative" & RDT == "Negative" & uRDT == "Negative" ~ "Negative"
+  ))%>% group_by(result)%>%
+  summarise(n.iid = n()))),
+  iid_df %>% group_by(test,result)%>%
+   summarise(n.iid = n()))%>%filter(result == "Positive"),
+  rbind(tibble(test = "Total", n.hhid = hhid_wdf%>%mutate(positives = case_when(
+  HRP2 == 0 & qPCR == 0 & RDT == 0 & uRDT == 0 ~ "Negative",
+  HRP2 != 0 | qPCR != 0 | RDT != 0 | uRDT != 0 ~ "Positive"
+))%>%filter(positives == "Positive")%>%nrow()), eaid_c.hh_df %>%
+  group_by(test) %>%
+  filter(n.cases.hh != 0)%>%
+  summarise(n.hhid = sum(n.hh))), by = "test")
+```
+```{r echo = FALSE, fig.width= 10, fig.height=6, fig.align = "center"}
+# A) Number of screened individuals per eaid
+plot_samsize<-ggplot(eaid_df, aes(x = samsize)) +
+  geom_histogram(alpha = 0.2, position = "identity", binwidth = 7, color = "gray35", fill = "gray35") +
+  labs(title = "A) # of screened individuals (iid)\nper Enumeration Area (eaid)",
+       y = "# of eaids",
+       x = "# of iid") +
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10))
+
+# B) Number of screened hhid per eaid
+plot_scre.hhid <-ggplot(eaid_df, aes(x = nhhid)) +
+  geom_histogram(alpha = 0.2, position = "identity", binwidth = 3, color = "gray35", fill = "gray35") +
+  labs(title = "B) # of households (hhid)\nper eaid",
+       y = "# of eaids",
+       x = "# of hhids") +
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10))
+
+# C) Number of screened individuals per household
+plot_scre.iid.hhid <- hhid_df %>% filter(scr.iid < 20,
+                                         test == "HRP2") %>%
+  ggplot(aes(x = scr.iid)) +
+  geom_histogram(alpha = 0.2, position = "identity", binwidth = 1, color = "gray35", fill = "gray35") +
+  labs(title = "C) # of iid per hhid",
+       y = "# of hhid",
+       x = "# of iid per hhid") +
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10))
+
+# Combine all plots using cowplot package
+
+plot3.freq <- plot_grid(plot_samsize,
+                        plot_scre.hhid,
+                        plot_scre.iid.hhid,
+                        iid_VennD, labels = c("",
+                                              "",
+                                              "",
+                                              "D) Positive iids by test"),
+                        label_size = 11,
+                        label_fontface = "plain")
+
+plot3.freq
+```
+<p style="font-size:8pt; font-style:italic">**Figure 3:** Distribution of the **A)** number screened individuals (**iid**) and **B)** the number of screened household (**hhid**) per enumeration area (**eaid**); **C)** distribution of the number of screened individuals per household; and **D)** number of positive iids by test.</p>
+
+### Performance of RDTs and uRDTs at eaid level
+
+In the tests used as reference to define hotspots (**HRP2** and **qPCR**), the median prevalence by **HRP2** and **qPCR** were 6.35 (IQR = $\pm$ 6.09, range from 0.9 to 30.6) and 1.8 (IQR = $\pm$ 4.08, and range from 0 to 44.7), respectively (**Fig. 4A** and **ST4**). Moreover, the median incidence in the **eaid**s was 20.52 cases/1000 persons years ($\pm$ 36.19 IQR, range from 0 to 199.95). Regarding **RDT**s and **uRDT**s, the median prevalence were 1.98 ($\pm$ 3.18 IQR), and 2.35 ($\pm$ 4.29 IQR), respectively (**Figure 4B**, **ST4**).
+```{r include=F}
+stbl4<-eaid_df%>%
+  select(names(eaid_df[grepl("eaid|^Incidence|prev\\.|T\\.1",names(eaid_df))]))%>%
+  pivot_longer(cols = names(eaid_df[grepl("^Incidence|prev\\.|T\\.1",names(eaid_df))]),
+                         names_to = "metrics", values_to = "values")%>%
+  group_by(metrics) %>%
+  summarise(mean = round(mean(values),3),
+            ci95 = round(1.96*sd(values)/sqrt(52),3),
+            median = round(median(values),3),
+            IQR = round(IQR(values),3),
+            min = round(min(values),3),
+            max = round(max(values),3))%>%
+  mutate(Group = case_when(
+    metrics == "Incidence"|metrics == "prev.HRP2"|metrics == "prev.qPCR" ~ "Reference",
+    metrics != "Incidence"&metrics != "prev.HRP2"&metrics != "prev.qPCR" ~ "Test"
+  ))
+```
+```{r echo = FALSE, warning = FALSE, fig.width = 6, fig.height = 6, fig.align = "center"}
+eaid_ldf <- eaid_df%>%
+  select(eaid,Incidence,prev.HRP2,prev.qPCR,prev.RDT,prev.uRDT,prop.RDT.1,prop.uRDT.1,Criterion1)%>%
+  pivot_longer(c("Incidence","prev.HRP2","prev.qPCR", "prev.RDT", "prev.uRDT", "prop.RDT.1", "prop.uRDT.1"),
+               names_to = "metrics",
+               values_to= "values")
+
+eaid_ldf2 <- eaid_ldf
+eaid_ldf$Criterion1<-"global"
+
+eaid_ldf<-rbind(eaid_ldf,eaid_ldf2)
+
+plot.inc.1<-eaid_ldf %>% filter(metrics == "Incidence")%>%
+  ggplot(aes(x=metrics, y=values, color = Criterion1)) + 
+  geom_violin(position=position_dodge(0.8), trim = T, alpha = 0.5) +
+  geom_jitter(position=position_jitterdodge(0.12), cex=2, alpha = 0.6)+
+  geom_hline(yintercept = 50, color = "red")+
+  scale_color_manual(values = c("gray35","dodgerblue4", "firebrick4"))+
+  theme_classic()+
+  ylab("Incidence")+
+  theme(axis.title.y = element_text(size=10), axis.title.x = element_blank())+
+  theme(axis.text= element_text(size=10))+
+  theme(legend.position = "none")
+
+plot.prev.1<-eaid_ldf %>% filter(metrics == "prev.HRP2"|metrics == "prev.qPCR")%>%
+  ggplot(aes(x=metrics, y=values, color = Criterion1)) + 
+  geom_violin(position=position_dodge(0.8), trim = T, alpha = 0.5) +
+  geom_jitter(position=position_jitterdodge(0.12), cex=2, alpha = 0.6)+
+  geom_hline(yintercept = 10, color = "red")+
+  scale_color_manual(values = c("gray35","dodgerblue4", "firebrick4"))+
+  theme_classic()+
+  ylab("Prevalence")+
+  scale_y_continuous(position = "right")+
+  scale_x_discrete(labels = c("HRP2", "qPCR"))+
+  theme(axis.title.y = element_text(size=10), axis.title.x = element_blank())+
+  theme(axis.text= element_text(size=10))+
+  theme(legend.position = "none")
+
+plot.prev.2<-eaid_ldf %>% filter((metrics == "prev.RDT"|metrics == "prev.uRDT")&Criterion1 == "global")%>%
+  ggplot(aes(x=metrics, y=values, color = Criterion1)) + 
+  geom_violin(position=position_dodge(), trim = T, alpha = 0.5) +
+  geom_jitter(position=position_jitterdodge(0.4), cex=2, alpha = 0.6)+
+  scale_color_manual(values = c("gray35","dodgerblue2", "firebrick2"))+
+  scale_x_discrete(labels = c("RDT", "uRDT"))+
+  theme_classic()+
+  labs(y = "Prevalence")+
+  theme(axis.title.y = element_text(size=10), axis.title.x = element_blank())+
+  theme(axis.text= element_text(size=10))+
+  theme(legend.position = "none")
+
+plot4.jitter <- plot_grid(plot_grid(plot.inc.1,
+                          plot.prev.1,
+                          nrow = 1,
+                          ncol = 2,
+                          rel_widths = c(1,2),
+                          rel_heights = 1),
+                          plot.prev.2,
+                          nrow = 2,
+                          ncol = 1,
+                          rel_widths = 1,
+                          rel_heights = 0.9,
+                          labels = c("A)", "B)"),
+                          label_size = 12,
+                          vjust = 1)
+plot4.jitter
+```
+<p style="font-size:8pt; font-style:italic">**Figure 4:** **A)** Jitter dot plot representing the distribution of the **incidence**, the **prevalence** by **HRP2** and **qPCR** between hotspots (dark red dots) and not hotspots (dark blue dots) eaids. The red horizontal line represents the cutoff used to define hotspots (**eaid**s with **Incidence** > 50/1000py, **HRP2** prevalence > 75% quantile, or **qPCR** prevalence > 10%). **B)** Jitter dot plot representing the distribution of the prevalence in each eaid by **RDT**s and by **uRDT**s. Each dot represents an **eaid**, and gray dots represents the total population screened.</p>
+
+Regardless of the criteria used to select hotspots, **uRDT**s had greater areas under the curve (**AUC**s) than **RDT**s at **eaid** level. Using the first criterion (**Incidence** > 50 py, prevalence by **HRP2** > 75% quartile, or prevalence by **qPCR** > 10%), 19 **eaid**s were defined as hotspots. The **AUC** of the prevalence by **uRDT**s (**AUC** = 0.844, 95%CI 0.724 - 0.964) was statistically greater than its counterpart using **RDT**s (AUC = 0.758, 95%CI 0.612 - 0.903) (p-value < 0.05, **Figure 5**, **ST5**). Its sensitivity, accuracy, ppv, and npv at the fixed specificity of 85% were 68.4%, 78.9%, 72.4% and 82.4%, respectively (**Figure 5B.1**). In the case of the prevalence by **RDT**s, the sensitivity, accuracy, ppv, and npv were 52.6%, 73.2%, 66.9% and 75.7%, respectively.
+
+Similar results were observed when using the hierarchical clustering method to define hotspots. A dendrogram based on Manhattann distance and the agglomerative Ward.D method was build, and 6 clusters (SD index for *K6* = 2.65) were found (**SF1** and **SF2**). Clusters 1 - 4 comprised the 75th quartile of the total **eaid**s, thus 15 **eaid**s were defined as hotspots. The **AUC** for **uRDT**s was 0.86 (95%CI 0.75 - 0.97) and it was statistically greater than **RDT**s (0.74). For **uRDT**s, the sensitivity, accuracy, ppv, and npv were 73.3%, 81.6%, 66.5%, and 88.7%, respectively. Regarding **RDT**s, the sensitivity, accuracy, ppv, and npv were 53.3%, 75.9%, 59%, and 81.8%, respectively. Results for the others criteria are found in **SF3** - **SF4** and **ST5** - **ST6**.
+
+```{r include = FALSE}
+summary(as.factor(eaid_df$Criterion1))
+stbl5<-tibble(Level = "eaid", eaid_roc_analysis$auc.test)
+stbl6<-tibble(Level = "eaid", eaid_roc_analysis$metrics)
+```
+
+```{r echo = FALSE, warning = FALSE, fig.width = 10, fig.height = 4, fig.align = "center"}
+plot.roc1 <- eaid_roc_analysis$roc_curves %>%
+  filter(response == "Criterion1", grepl("prev",predictor)) %>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ))%>%
+  mutate(metric = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>% dplyr::arrange(sensitivities)%>%
+  ggplot(aes(x=1-specificities, y=sensitivities, group=predictor)) +
+  geom_line(aes(linetype = metric, color=test), size = 1.25) +
+  geom_point(aes(x = c(unlist(1-eaid_roc_analysis$metrics%>%
+                                filter(metric == "specificity", outcome == "Criterion1", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion1", grepl("prev",predictor))%>%nrow() - eaid_roc_analysis$metrics%>%filter(metric == "specificity", outcome == "Criterion1", grepl("prev",predictor))%>%nrow()))),
+                 y = c(unlist(eaid_roc_analysis$metrics%>%
+                                filter(metric == "sensitivity", outcome == "Criterion1", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion1", grepl("prev",predictor))%>%nrow() -  eaid_roc_analysis$metrics %>% filter(metric == "sensitivity", outcome == "Criterion1", grepl("prev",predictor)) %>%nrow())))), size = 2) +
+  
+  geom_text(aes(y = .5, x = .5, label = paste("RDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1"), value),3)," (", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1"), lower),3)," - ", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1"), upper),3),")")), vjust = 1, color =  brewer.pal(3,name="Set1")[2], size = 3)+
+  
+  geom_text(aes(y = .4, x = .5, label = paste("uRDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1"), value),3)," (",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1"), lower),3), " - ",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1"), upper),3), ")"
+                                              )), vjust = 1, color =  brewer.pal(3,name="Set1")[3], size = 3)+
+  labs(title = "A) ROC curve",
+       y = "Sensitivity",
+       x = "1 - Specificity") +
+  theme_bw() +
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10)) +
+  theme(legend.position="none")
+
+plot.metrics1<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion1", grepl("prev",predictor), metric != "threshold", metric != "auc", metric != "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "B.1) Performance",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap(~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="none")
+
+plot.sensitivity1<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion1", grepl("prev",predictor),metric == "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "B.2) Sensitivity",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="bottom")
+
+
+plot5.performance_eaid <- ggdraw()+
+  draw_plot(plot.roc1, x = 0, y = 0, width = .4, height = 1) +
+  draw_plot(plot.metrics1, x = .4, y = 0, width = .3, height = 1)+
+  draw_plot(plot.sensitivity1, x = .7, y = 0, width = .3, height = 1)
+
+plot5.performance_eaid
+```
+<p style="font-size:8pt; font-style:italic">**Figure 5:** Performance of **RDT**s and **uRDT**s in detecting eaid hotspots using Criterion 1. A) ROC curve, solid black points represent the Sensitivity at a fixed specificity of 85%. B) Forest plot comparing the performance of **RDT**s and **uRDT**s in terms of Accuracy, Area under the curve, Negative and Positive predicted values, Sensitivity, and Specificity.</p>
+
+```{r include = F}
+SPlot1.NbClust <- tibble(Clusters = as.integer(names(HClust.Analysis$Nb.Clust$All.index)),
+       SDIndex = (HClust.Analysis$Nb.Clust$All.index))%>%
+  ggplot(aes(x = Clusters, y = SDIndex)) +
+  geom_line(color = "darkblue", alpha = 0.5) +
+  geom_text(aes(x = Clusters + 0.5, y = SDIndex + 0.2, label =round(HClust.Analysis$Nb.Clust$All.index,2)))+
+  geom_point(color = "darkblue") +
+  scale_x_continuous(breaks = 1:15L)+
+  scale_y_continuous(breaks = 1:10)+
+  labs(y = "SD Index",
+       x = "# of Clusters") +
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10))
+
+Clust.Heatmap.Plots$Heatmap_plot <- Clust.Heatmap.Plots$Heatmap_plot +
+  geom_hline(yintercept = 15.5)
+
+SPlot2.clusterdheatmap <- ggdraw()+
+  draw_plot(Clust.Heatmap.Plots$Heatmap_plot , x = 0, y = 0, width = .75, height = 1)+
+  draw_plot(Clust.Heatmap.Plots$dendro_plot, x = .7, y = .06, width = .3, height = .97)
+```
+```{r include = FALSE}
+
+stbl7 <- HClust.Analysis$ac
+
+summary(as.factor(eaid_df$Criterion1.2))
+summary(as.factor(eaid_df$Criterion1.HRP2))
+summary(as.factor(eaid_df$Criterion1.Incidence))
+summary(as.factor(eaid_df$Criterion1.qPCR))
+summary(as.factor(eaid_df$Criterion2))
+```
+
+```{r include = F}
+
+plot.roc2 <- eaid_roc_analysis$roc_curves %>%
+  filter(response == "Criterion1.2", grepl("prev",predictor)) %>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ))%>%
+  mutate(metric = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>% dplyr::arrange(sensitivities)%>%
+  ggplot(aes(x=1-specificities, y=sensitivities, group=predictor)) +
+  geom_line(aes(linetype = metric, color=test), size = 1.25) +
+  geom_point(aes(x = c(unlist(1-eaid_roc_analysis$metrics%>%
+                                filter(metric == "specificity", outcome == "Criterion1.2", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion1.2", grepl("prev",predictor))%>%nrow() - eaid_roc_analysis$metrics%>%filter(metric == "specificity", outcome == "Criterion1.2", grepl("prev",predictor))%>%nrow()))),
+                 y = c(unlist(eaid_roc_analysis$metrics%>%
+                                filter(metric == "sensitivity", outcome == "Criterion1.2", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion1.2", grepl("prev",predictor))%>%nrow() -  eaid_roc_analysis$metrics %>% filter(metric == "sensitivity", outcome == "Criterion1.2", grepl("prev",predictor)) %>%nrow())))), size = 2) +
+  
+  geom_text(aes(y = .4, x = .5, label = paste("RDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.2"), value),3)," (", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.2"), lower),3)," - ", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.2"), upper),3),")")), vjust = 1, color =  brewer.pal(3,name="Set1")[2], size = 3)+
+  
+  geom_text(aes(y = .5, x = .5, label = paste("uRDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.2"), value),3)," (",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.2"), lower),3), " - ",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.2"), upper),3), ")"
+                                              )), vjust = 1, color =  brewer.pal(3,name="Set1")[3], size = 3)+
+  labs(title = "A) ROC curve (Criterion 2)",
+       y = "Sensitivity",
+       x = "1 - Specificity") +
+  theme_bw() +
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10)) +
+  theme(legend.position="none")
+
+plot.metrics2<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion1.2", grepl("prev",predictor), metric != "threshold", metric != "auc", metric != "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "B.1) Performance (Criterion 2)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap(~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="none")
+
+plot.sensitivity2<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion1.2", grepl("prev",predictor),metric == "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "B.2) Sensitivity\n(Criterion 2)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="bottom")
+
+plot.roc3 <- eaid_roc_analysis$roc_curves %>%
+  filter(response == "Criterion2", grepl("prev",predictor)) %>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ))%>%
+  mutate(metric = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>% dplyr::arrange(sensitivities)%>%
+  ggplot(aes(x=1-specificities, y=sensitivities, group=predictor)) +
+  geom_line(aes(linetype = metric, color=test), size = 1.25) +
+  geom_point(aes(x = c(unlist(1-eaid_roc_analysis$metrics%>%
+                                filter(metric == "specificity", outcome == "Criterion2", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion2", grepl("prev",predictor))%>%nrow() - eaid_roc_analysis$metrics%>%filter(metric == "specificity", outcome == "Criterion2", grepl("prev",predictor))%>%nrow()))),
+                 y = c(unlist(eaid_roc_analysis$metrics%>%
+                                filter(metric == "sensitivity", outcome == "Criterion2", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion2", grepl("prev",predictor))%>%nrow() -  eaid_roc_analysis$metrics %>% filter(metric == "sensitivity", outcome == "Criterion2", grepl("prev",predictor)) %>%nrow())))), size = 2) +
+  
+  geom_text(aes(y = .4, x = .5, label = paste("RDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion2"), value),3)," (", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion2"), lower),3)," - ", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion2"), upper),3),")")), vjust = 1, color =  brewer.pal(3,name="Set1")[2], size = 3)+
+  
+  geom_text(aes(y = .5, x = .5, label = paste("uRDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion2"), value),3)," (",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion2"), lower),3), " - ",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion2"), upper),3), ")"
+                                              )), vjust = 1, color =  brewer.pal(3,name="Set1")[3], size = 3)+
+  labs(title = "C) ROC curve (HC)",
+       y = "Sensitivity",
+       x = "1 - Specificity") +
+  theme_bw() +
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10)) +
+  theme(legend.position="none")
+
+plot.metrics3<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion2", grepl("prev",predictor), metric != "threshold", metric != "auc", metric != "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "D.1) Performance (HC)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap(~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="none")
+
+plot.sensitivity3<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion2", grepl("prev",predictor),metric == "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "D.2) Sensitivity (HC)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="bottom")
+
+SPlot3.performance_eaid <- ggdraw()+
+  draw_plot(plot.roc2, x = 0, y = .5, width = .4, height = .5) +
+  draw_plot(plot.metrics2, x = .4, y = .5, width = .3, height = .5)+
+  draw_plot(plot.sensitivity2, x = .7, y = .5, width = .3, height = .5)+
+  draw_plot(plot.roc3, x = 0, y = 0, width = .4, height = .5) +
+  draw_plot(plot.metrics3, x = .4, y = 0, width = .3, height = .5)+
+  draw_plot(plot.sensitivity3, x = .7, y = 0, width = .3, height = .5)
+
+```
+
+```{r include = F}
+
+plot.roc4 <- eaid_roc_analysis$roc_curves %>%
+  filter(response == "Criterion1.Incidence", grepl("prev",predictor)) %>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ))%>%
+  mutate(metric = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>% dplyr::arrange(sensitivities)%>%
+  ggplot(aes(x=1-specificities, y=sensitivities, group=predictor)) +
+  geom_line(aes(linetype = metric, color=test), size = 1.25) +
+  geom_point(aes(x = c(unlist(1-eaid_roc_analysis$metrics%>%
+                                filter(metric == "specificity", outcome == "Criterion1.Incidence", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion1.Incidence", grepl("prev",predictor))%>%nrow() - eaid_roc_analysis$metrics%>%filter(metric == "specificity", outcome == "Criterion1.Incidence", grepl("prev",predictor))%>%nrow()))),
+                 y = c(unlist(eaid_roc_analysis$metrics%>%
+                                filter(metric == "sensitivity", outcome == "Criterion1.Incidence", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion1.Incidence", grepl("prev",predictor))%>%nrow() -  eaid_roc_analysis$metrics %>% filter(metric == "sensitivity", outcome == "Criterion1.Incidence", grepl("prev",predictor)) %>%nrow())))), size = 2) +
+  
+  geom_text(aes(y = .4, x = .5, label = paste("RDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.Incidence"), value),3)," (", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.Incidence"), lower),3)," - ", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.Incidence"), upper),3),")")), vjust = 1, color =  brewer.pal(3,name="Set1")[2], size = 3)+
+  
+  geom_text(aes(y = .5, x = .5, label = paste("uRDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.Incidence"), value),3)," (",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.Incidence"), lower),3), " - ",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.Incidence"), upper),3), ")"
+                                              )), vjust = 1, color =  brewer.pal(3,name="Set1")[3], size = 3)+
+  labs(title = "A) ROC curve (Incidence)",
+       y = "Sensitivity",
+       x = "1 - Specificity") +
+  theme_bw() +
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10)) +
+  theme(legend.position="none")
+
+plot.metrics4<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion1.Incidence", grepl("prev",predictor), metric != "threshold", metric != "auc", metric != "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "B.1) Performance (Incidence)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap(~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="none")
+
+plot.sensitivity4<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion1.Incidence", grepl("prev",predictor),metric == "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "B.2) Sensitivity\nIncidence",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="bottom")
+
+plot.roc5 <- eaid_roc_analysis$roc_curves %>%
+  filter(response == "Criterion1.HRP2", grepl("prev",predictor)) %>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ))%>%
+  mutate(metric = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>% dplyr::arrange(sensitivities)%>%
+  ggplot(aes(x=1-specificities, y=sensitivities, group=predictor)) +
+  geom_line(aes(linetype = metric, color=test), size = 1.25) +
+  geom_point(aes(x = c(unlist(1-eaid_roc_analysis$metrics%>%
+                                filter(metric == "specificity", outcome == "Criterion1.HRP2", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion1.HRP2", grepl("prev",predictor))%>%nrow() - eaid_roc_analysis$metrics%>%filter(metric == "specificity", outcome == "Criterion1.HRP2", grepl("prev",predictor))%>%nrow()))),
+                 y = c(unlist(eaid_roc_analysis$metrics%>%
+                                filter(metric == "sensitivity", outcome == "Criterion1.HRP2", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion1.HRP2", grepl("prev",predictor))%>%nrow() -  eaid_roc_analysis$metrics %>% filter(metric == "sensitivity", outcome == "Criterion1.HRP2", grepl("prev",predictor)) %>%nrow())))), size = 2) +
+  
+  geom_text(aes(y = .4, x = .5, label = paste("RDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.HRP2"), value),3)," (", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.HRP2"), lower),3)," - ", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.HRP2"), upper),3),")")), vjust = 1, color =  brewer.pal(3,name="Set1")[2], size = 3)+
+  
+  geom_text(aes(y = .5, x = .5, label = paste("uRDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.HRP2"), value),3)," (",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.HRP2"), lower),3), " - ",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.HRP2"), upper),3), ")"
+                                              )), vjust = 1, color =  brewer.pal(3,name="Set1")[3], size = 3)+
+  labs(title = "C) ROC curve (HRP2)",
+       y = "Sensitivity",
+       x = "1 - Specificity") +
+  theme_bw() +
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10)) +
+  theme(legend.position="none")
+
+plot.metrics5<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion1.HRP2", grepl("prev",predictor), metric != "threshold", metric != "auc", metric != "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "D.1) Performance (HRP2)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap(~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="none")
+
+plot.sensitivity5<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion1.HRP2", grepl("prev",predictor),metric == "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "D.2) Sensitivity (HRP2)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="bottom")
+
+plot.roc6 <- eaid_roc_analysis$roc_curves %>%
+  filter(response == "Criterion1.qPCR", grepl("prev",predictor)) %>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ))%>%
+  mutate(metric = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>% dplyr::arrange(sensitivities)%>%
+  ggplot(aes(x=1-specificities, y=sensitivities, group=predictor)) +
+  geom_line(aes(linetype = metric, color=test), size = 1.25) +
+  geom_point(aes(x = c(unlist(1-eaid_roc_analysis$metrics%>%
+                                filter(metric == "specificity", outcome == "Criterion1.qPCR", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion1.qPCR", grepl("prev",predictor))%>%nrow() - eaid_roc_analysis$metrics%>%filter(metric == "specificity", outcome == "Criterion1.qPCR", grepl("prev",predictor))%>%nrow()))),
+                 y = c(unlist(eaid_roc_analysis$metrics%>%
+                                filter(metric == "sensitivity", outcome == "Criterion1.qPCR", grepl("prev",predictor))%>%
+                                select(value)), rep(NA, times = (eaid_roc_analysis$roc_curves%>%filter(response == "Criterion1.qPCR", grepl("prev",predictor))%>%nrow() -  eaid_roc_analysis$metrics %>% filter(metric == "sensitivity", outcome == "Criterion1.qPCR", grepl("prev",predictor)) %>%nrow())))), size = 2) +
+  
+  geom_text(aes(y = .4, x = .5, label = paste("RDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.qPCR"), value),3)," (", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.qPCR"), lower),3)," - ", 
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.RDT", outcome == "Criterion1.qPCR"), upper),3),")")), vjust = 1, color =  brewer.pal(3,name="Set1")[2], size = 3)+
+  
+  geom_text(aes(y = .5, x = .5, label = paste("uRDT =", round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.qPCR"), value),3)," (",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.qPCR"), lower),3), " - ",
+                                              round(select(filter(eaid_roc_analysis[["metrics"]],metric == "auc", predictor == "prev.uRDT", outcome == "Criterion1.qPCR"), upper),3), ")"
+                                              )), vjust = 1, color =  brewer.pal(3,name="Set1")[3], size = 3)+
+  labs(title = "E) ROC curve (qPCR)",
+       y = "Sensitivity",
+       x = "1 - Specificity") +
+  theme_bw() +
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10)) +
+  theme(legend.position="none")
+
+plot.metrics6<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion1.qPCR", grepl("prev",predictor), metric != "threshold", metric != "auc", metric != "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "F.1) Performance (qPCR)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap(~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="none")
+
+plot.sensitivity6<-eaid_roc_analysis$metrics%>%
+  filter(outcome == "Criterion1.qPCR", grepl("prev",predictor),metric == "sensitivity")%>%
+  mutate(test = case_when(
+    grepl("\\.RDT",predictor) ~ "RDT",
+    grepl("\\.uRDT",predictor) ~ "uRDT"
+  ),
+  test2 = case_when(
+    grepl("prev",predictor) ~ "prev"
+  ))%>%
+  ggplot(aes(x = test, y = value, ymin = lower, ymax = upper, color = test)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "F.2) Sensitivity (qPCR)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="bottom")
+
+SPlot4.performance_eaid <- ggdraw()+
+  draw_plot(plot.roc4, x = 0, y = .66, width = .4, height = .33) +
+  draw_plot(plot.metrics4, x = .4, y = .66, width = .3, height = .33)+
+  draw_plot(plot.sensitivity4, x = .7, y = .66, width = .3, height = .33)+
+  draw_plot(plot.roc5, x = 0, y = .33, width = .4, height = .33) +
+  draw_plot(plot.metrics5, x = .4, y = .33, width = .3, height = .33)+
+  draw_plot(plot.sensitivity5, x = .7, y = .33, width = .3, height = .33)+
+  draw_plot(plot.roc6, x = 0, y = 0, width = .4, height = .33) +
+  draw_plot(plot.metrics6, x = .4, y = 0, width = .3, height = .33)+
+  draw_plot(plot.sensitivity6, x = .7, y = 0, width = .3, height = .33)
+
+```
+
+### Performance of RDTs and uRDTs at hhid level
+
+Because of the presence of outliers in the number of **iid**s pr **hhid** (more than 60 **iid**s pr **hhid**) and the large number of households with just one individual screened, only households with more than 2 and less than 20 screened individuals were included to analyze the performance of **RDT**s and **uRDT**s at household level.  For all tests, a median of one infected individual per household was found, and a total of 227/815 households had at least one individual detected infected for any of the four tests (191 by **HRP2**, 81 by **qPCR**, 71 by **RDT**s, and 87 by **uRDT**s).
+```{r include = FALSE}
+# ----
+stbl8<-full_join(rbind(tibble(test = "scr.iid", hhid_df2 %>% filter(test == "HRP2")%>%ungroup()%>%
+  summarise(median = median(scr.iid), # median of individuals screened by household 
+            q25 = quantile(scr.iid, .25),
+            q75 = quantile(scr.iid, .75),
+            IQR = IQR(scr.iid),
+            min = min(scr.iid),
+            max = max(scr.iid))),
+                       hhid_df2 %>% filter(inf.iid != 0) %>%
+  group_by(test) %>%
+  summarise(median = median(inf.iid), # median of infected individuals screenned by household by test
+            q25 = quantile(inf.iid, .25),
+            q75 = quantile(inf.iid, .75),
+            IQR = IQR(inf.iid),
+            min = min(inf.iid),
+            max = max(inf.iid))),
+  rbind(tibble(test = "scr.iid", pos.hhid = hhid_wdf2%>%mutate(positives = case_when(
+  HRP2 == 0 & qPCR == 0 & RDT == 0 & uRDT == 0 ~ "Negative",
+  HRP2 != 0 | qPCR != 0 | RDT != 0 | uRDT != 0 ~ "Positives"
+))%>%filter(positives == "Positives")%>%nrow()), eaid_c.hh_df2 %>%
+  group_by(test) %>%
+  filter(n.cases.hh != 0)%>%
+  summarise(pos.hhid = sum(n.hh))), by = "test"
+  )
+
+```
+```{r echo = FALSE, warning = FALSE, fig.width = 6, fig.height = 5, fig.align = "center"}
+
+hhid_df3 <- hhid_df2
+hhid_df2$hh_hotspots1 <- "global"
+hhid_df2 <- rbind(hhid_df2, hhid_df3)
+
+
+plot.6.1 <- hhid_df2 %>% filter (test == "HRP2") %>%
+  ggplot(aes(x=test, y=inf.iid, color = hh_hotspots1)) + 
+  geom_violin(position=position_dodge(0.8), trim = T, alpha = 0.5) +
+  geom_jitter(position=position_jitterdodge(jitter.width = .12, jitter.height = .25,), cex=2, alpha = 0.4)+
+  geom_hline(yintercept = 1.5)+
+  scale_color_manual(values = c("gray35","dodgerblue4", "firebrick4"))+
+  scale_y_continuous(limits = c(0,8), breaks = 1:8L)+
+  theme_classic()+
+  labs(y = "# of infected iids per hhid")+
+  theme(axis.title.y = element_text(size=10), axis.title.x = element_blank())+
+  theme(axis.text= element_text(size=10))+
+  theme(legend.position = "none")
+
+plot.6.2 <- hhid_df2 %>% filter (test == "qPCR") %>%
+  ggplot(aes(x=test, y=inf.iid, color = hh_hotspots1)) + 
+  geom_violin(position=position_dodge(0.8), trim = T, alpha = 0.5) +
+  geom_jitter(position=position_jitterdodge(jitter.width = .12, jitter.height = .25,), cex=2, alpha = 0.4)+
+  geom_hline(yintercept = 0.5)+
+  scale_color_manual(values = c("gray35","dodgerblue4", "firebrick4"))+
+  theme_classic()+
+  labs(y = "")+
+  theme(axis.title.y = element_text(size=10), axis.title.x = element_blank(),
+        axis.line.y = element_blank(), axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())+
+  theme(axis.text= element_text(size=10))+
+  theme(legend.position = "none")
+
+plot.6.3 <- hhid_df2 %>% filter ((test == "RDT" | test == "uRDT") & hh_hotspots1 == "global") %>%
+  ggplot(aes(x=test, y=inf.iid, color = hh_hotspots1)) + 
+  geom_violin(position=position_dodge(0.8), trim = T, alpha = 0.5) +
+  geom_jitter(position=position_jitterdodge(jitter.width = .4, jitter.height = .25,), cex=2, alpha = 0.4)+
+  scale_color_manual(values = c("gray35","dodgerblue2", "firebrick2"))+
+  theme_classic()+
+  labs(y = "# of infected iids per hhid")+
+  theme(axis.title.y = element_text(size=10), axis.title.x = element_blank())+
+  theme(axis.text= element_text(size=10))+
+  theme(legend.position = "none")
+
+plot.6 <- plot_grid(plot_grid(plot.6.1,plot.6.2, ncol = 2), plot.6.3, nrow = 2)
+
+plot.6
+```
+<p style="font-size:8pt; font-style:italic">**Figure 6:** Jitter dot plot representing the distribution of the number of infected individuals per houshold by each test and between hotspots (dark red dots) and not hotspots (dark blue dots) **hhid**s. Each dot represents a **hhid**, and gray dots represents the total households screened..</p>
+
+One hundred twelve **hhid**s were classified as hotspots and the **AUC** for **uRDT**s was 0.705, while the **AUC** for **RDT**s was 0.704 (p-value = 0.5, power = 0.07) (**ST5**). Additionally, none of the tests had a good performance in terms of sensitivity, 45.5% (CI95% 36.6 - 54.8) for **uRDT**s and 43.8% (CI95% 34.9 - 53) for **RDT**s (**Fig. 7B**, **ST6**). Performance using thee other two criteria are shown in **SF5**.
+```{r include = FALSE}
+summary(as.factor(hhid_wdf2$hh_hotspots1))
+summary(as.factor(hhid_wdf2$hh_hotspots2))
+summary(as.factor(hhid_wdf2$hh_hotspots3))
+
+stbl5<-rbind(stbl5,tibble(Level = "hhid", hhid_roc_analysis$auc.test))
+stbl6<-rbind(stbl6,tibble(Level = "hhid", hhid_roc_analysis$metrics))
+```
+
+```{r echo = FALSE, warning = FALSE, fig.width = 10, fig.height = 4, fig.align = "center"}
+plot.roc7 <- hhid_roc_analysis$roc_curves %>%
+  filter(response == "hh_hotspots1") %>%
+  dplyr::arrange(sensitivities) %>%
+  ggplot(aes(x=1-specificities, y=sensitivities, group=predictor)) +
+  geom_line(aes(color=predictor),size = 1.25) +
+  geom_point(aes(x = c(unlist(1-hhid_roc_analysis$metrics%>%
+                                filter(metric == "specificity", outcome == "hh_hotspots1")%>%
+                                select(value)), rep(NA, times = (hhid_roc_analysis$roc_curves%>%filter(response == "hh_hotspots1")%>%nrow() - 
+                                                                         hhid_roc_analysis$metrics%>%filter(metric == "specificity", outcome == "hh_hotspots1")%>%nrow()))),
+                 y = c(unlist(hhid_roc_analysis$metrics%>%
+                                filter(metric == "sensitivity", outcome == "hh_hotspots1")%>%
+                                select(value)), rep(NA, times = (hhid_roc_analysis$roc_curves%>%filter(response == "hh_hotspots1")%>%nrow() -   hhid_roc_analysis$metrics %>% filter(metric == "sensitivity", outcome == "hh_hotspots1") %>%nrow())))), size = 2) +
+  
+  geom_text(aes(y = .4, x = .5, label = paste("RDT =", round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "RDT", outcome == "hh_hotspots1"), value),3), " (",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "RDT", outcome == "hh_hotspots1"), lower),2), " - ",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "RDT", outcome == "hh_hotspots1"), upper),),")"
+                                              )), vjust = 1, color =  brewer.pal(3,name="Set1")[2], size = 3)+
+  
+  geom_text(aes(y = .5, x = .5, label = paste("uRDT =", round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "uRDT", outcome == "hh_hotspots1"), value),3), " (",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "uRDT", outcome == "hh_hotspots1"), lower),2), " - ",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "uRDT", outcome == "hh_hotspots1"), upper),),")")), vjust = 1, color =  brewer.pal(3,name="Set1")[3], size = 3)+
+  labs(title = "A) ROC Curve",
+       y = "Sensitivity",
+       x = "1 - Specificity") +
+  theme_bw() +
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10)) +
+  theme(legend.position="none")
+
+plot.metrics7<-hhid_roc_analysis$metrics%>%
+  filter(outcome == "hh_hotspots1", metric != "threshold", metric != "auc", metric != "sensitivity")%>%
+  ggplot(aes(x = predictor, y = value, ymin = lower, ymax = upper, color = predictor)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "B.1) Performance comparison",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap( ~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="none")
+
+plot.sensitivity7<-hhid_roc_analysis$metrics%>%
+  filter(outcome == "hh_hotspots1", metric == "sensitivity")%>%
+  ggplot(aes(x = predictor, y = value, ymin = lower, ymax = upper, color = predictor)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "B.2) Sensitivity",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap( ~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="bottom")
+
+Plot8.performance_hhid <- ggdraw()+
+  draw_plot(plot.roc7, x = 0, y = 0, width = .4, height = 1) +
+  draw_plot(plot.metrics7, x = .4, y = 0, width = .3, height = 1)+
+  draw_plot(plot.sensitivity7, x = .7, y = 0, width = .3, height = 1)
+
+Plot8.performance_hhid
+```
+<p style="font-size:8pt; font-style:italic">**Figure 7:** Performance of RDTs and uRDTs in detecting hhid hotspots using households with individuals positives to HRP2 as reference. A) ROC curve, solid black points represent the Sensitivity and Specificity that maximize the Youden metric. B) Forest plots comparing the performance of RDTs and uRDTs in terms of Accuracy, Area under the curve, Negative and Positive predicted values, Sensitivity, and Specificity.</p>
+```{r include = FALSE}
+plot.roc8 <- hhid_roc_analysis$roc_curves %>%
+  filter(response == "hh_hotspots2") %>%
+  dplyr::arrange(sensitivities) %>%
+  ggplot(aes(x=1-specificities, y=sensitivities, group=predictor)) +
+  geom_line(aes(color=predictor),size = 1.25) +
+  geom_point(aes(x = c(unlist(1-hhid_roc_analysis$metrics%>%
+                                filter(metric == "specificity", outcome == "hh_hotspots2")%>%
+                                select(value)), rep(NA, times = (hhid_roc_analysis$roc_curves%>%filter(response == "hh_hotspots2")%>%nrow() - 
+                                                                         hhid_roc_analysis$metrics%>%filter(metric == "specificity", outcome == "hh_hotspots2")%>%nrow()))),
+                 y = c(unlist(hhid_roc_analysis$metrics%>%
+                                filter(metric == "sensitivity", outcome == "hh_hotspots2")%>%
+                                select(value)), rep(NA, times = (hhid_roc_analysis$roc_curves%>%filter(response == "hh_hotspots2")%>%nrow() -   hhid_roc_analysis$metrics %>% filter(metric == "sensitivity", outcome == "hh_hotspots2") %>%nrow())))), size = 2) +
+  
+  geom_text(aes(y = .4, x = .5, label = paste("RDT =", round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "RDT", outcome == "hh_hotspots2"), value),3), " (",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "RDT", outcome == "hh_hotspots2"), lower),2), " - ",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "RDT", outcome == "hh_hotspots2"), upper),),")"
+                                              )), vjust = 1, color =  brewer.pal(3,name="Set1")[2], size = 3)+
+  
+  geom_text(aes(y = .5, x = .5, label = paste("uRDT =", round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "uRDT", outcome == "hh_hotspots2"), value),3), " (",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "uRDT", outcome == "hh_hotspots2"), lower),2), " - ",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "uRDT", outcome == "hh_hotspots2"), upper),),")")), vjust = 1, color =  brewer.pal(3,name="Set1")[3], size = 3)+
+  labs(title = "A) ROC Curve (HRP2)",
+       y = "Sensitivity",
+       x = "1 - Specificity") +
+  theme_bw() +
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10)) +
+  theme(legend.position="none")
+
+plot.metrics8<-hhid_roc_analysis$metrics%>%
+  filter(outcome == "hh_hotspots2", metric != "threshold", metric != "auc", metric != "sensitivity")%>%
+  ggplot(aes(x = predictor, y = value, ymin = lower, ymax = upper, color = predictor)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "B.1) Performance (HRP2)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap( ~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="none")
+
+plot.sensitivity8<-hhid_roc_analysis$metrics%>%
+  filter(outcome == "hh_hotspots2", metric == "sensitivity")%>%
+  ggplot(aes(x = predictor, y = value, ymin = lower, ymax = upper, color = predictor)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "B.2) Sensitivity (HRP2)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap( ~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="bottom")
+
+plot.roc9 <- hhid_roc_analysis$roc_curves %>%
+  filter(response == "hh_hotspots3") %>%
+  dplyr::arrange(sensitivities) %>%
+  ggplot(aes(x=1-specificities, y=sensitivities, group=predictor)) +
+  geom_line(aes(color=predictor),size = 1.25) +
+  geom_point(aes(x = c(unlist(1-hhid_roc_analysis$metrics%>%
+                                filter(metric == "specificity", outcome == "hh_hotspots3")%>%
+                                select(value)), rep(NA, times = (hhid_roc_analysis$roc_curves%>%filter(response == "hh_hotspots3")%>%nrow() - 
+                                                                         hhid_roc_analysis$metrics%>%filter(metric == "specificity", outcome == "hh_hotspots3")%>%nrow()))),
+                 y = c(unlist(hhid_roc_analysis$metrics%>%
+                                filter(metric == "sensitivity", outcome == "hh_hotspots3")%>%
+                                select(value)), rep(NA, times = (hhid_roc_analysis$roc_curves%>%filter(response == "hh_hotspots3")%>%nrow() -   hhid_roc_analysis$metrics %>% filter(metric == "sensitivity", outcome == "hh_hotspots3") %>%nrow())))), size = 2) +
+  
+  geom_text(aes(y = .4, x = .5, label = paste("RDT =", round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "RDT", outcome == "hh_hotspots3"), value),3), " (",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "RDT", outcome == "hh_hotspots3"), lower),2), " - ",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "RDT", outcome == "hh_hotspots3"), upper),),")"
+                                              )), vjust = 1, color =  brewer.pal(3,name="Set1")[2], size = 3)+
+  
+  geom_text(aes(y = .5, x = .5, label = paste("uRDT =", round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "uRDT", outcome == "hh_hotspots3"), value),3), " (",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "uRDT", outcome == "hh_hotspots3"), lower),2), " - ",
+                                              round(select(filter(hhid_roc_analysis[["metrics"]],metric == "auc", predictor == "uRDT", outcome == "hh_hotspots3"), upper),),")")), vjust = 1, color =  brewer.pal(3,name="Set1")[3], size = 3)+
+  labs(title = "C) ROC Curve (qPCR)",
+       y = "Sensitivity",
+       x = "1 - Specificity") +
+  theme_bw() +
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10)) +
+  theme(legend.position="none")
+
+plot.metrics9<-hhid_roc_analysis$metrics%>%
+  filter(outcome == "hh_hotspots3", metric != "threshold", metric != "auc", metric != "sensitivity")%>%
+  ggplot(aes(x = predictor, y = value, ymin = lower, ymax = upper, color = predictor)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "D.1) Performance (qPCR)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap( ~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="none")
+
+plot.sensitivity9<-hhid_roc_analysis$metrics%>%
+  filter(outcome == "hh_hotspots3", metric == "sensitivity")%>%
+  ggplot(aes(x = predictor, y = value, ymin = lower, ymax = upper, color = predictor)) +
+  geom_pointrange(size = 0.8) + 
+  geom_hline(yintercept = 0.8, lty = 2) +  # add a dotted line at x=1 after flip
+  coord_flip() +  # flip coordinates (puts labels on y axis)\
+  scale_color_manual(values = c(brewer.pal(3,name="Set1")[c(2,3)]))+
+  scale_y_continuous(limits = c(0,1))+
+  labs(title = "D.2) Sensitivity (qPCR)",
+       x = "Predictor",
+       y = "Mean (95% CI)")+
+  theme_bw() +  # use a white background
+  facet_wrap( ~ metric, ncol = 2)+
+  theme(plot.title = element_text(hjust = 0, size = 11)) +
+  theme(axis.title.x = element_text(size = 10)) +
+  theme(axis.title.y = element_text(size = 10)) +
+  theme(axis.text = element_text(size = 10),
+        axis.text.x = element_text(angle = 45, vjust = .5)) +
+  theme(legend.position="bottom")
+
+
+SPlot5.performance_hhid <- ggdraw()+
+  draw_plot(plot.roc8, x = 0, y = .5, width = .4, height = .5) +
+  draw_plot(plot.metrics8, x = .4, y = .5, width = .3, height = .5)+
+  draw_plot(plot.sensitivity8, x = .7, y = .5, width = .3, height = .5)+
+  draw_plot(plot.roc9, x = 0, y = 0, width = .4, height = .5) +
+  draw_plot(plot.metrics9, x = .4, y = 0, width = .3, height = .5)+
+  draw_plot(plot.sensitivity9, x = .7, y = 0, width = .3, height = .5)
+
+SPlot5.performance_hhid
+```
+
+## Acknowledgements
+
+We thank study participants, and support from field staff, Ministry of Health and Social Services, and others on the study team (Mi-suk Kang Dufour, Leah Schrubbe, Joy Yala, Sofonias Tessema).
+
+## Supplementary information
+
+###Supplementary Figure 1
+```{r echo = FALSE, warning = FALSE, fig.width = 4, fig.height = 4, fig.align = "center"}
+SPlot1.NbClust
+```
+<p style="font-size:8pt; font-style:italic">**Supplementary Figure 1:** Majority rule to define optimal number of clusters. x-axis represents the number of clusters present in the data set, and the y-axis the number of criteria proposing an specific number of clusters.</p>
+
+###Supplementary Figure 2
+```{r echo = FALSE, warning = FALSE, fig.width = 7, fig.height = 10, fig.align = "center"}
+SPlot2.clusterdheatmap
+```
+<p style="font-size:8pt; font-style:italic">**Supplementary Figure 2:** Clustered Heatmap representing the similarities in the Incidence, the HRP2 prevalence and the qPCR prevalence among communities. Bottom clusters in the y dendrogram were used to define eaids that are hotspots.</p>
+
+###Supplementary Figure 3
+```{r echo = FALSE, warning = FALSE, fig.width = 10, fig.height = 8, fig.align = "center"}
+SPlot3.performance_eaid
+```
+<p style="font-size:8pt; font-style:italic">**Supplementary Figure 3:** Performance of RDTs and uRDTs in detecting eaid hotspots using Criterion 2 (A and B) and Criterion 3 (Hierarchical clustering or HC, C and D). A - C) ROC curve, solid black points represent the Sensitivity at the fixed specificity of 85%. B - D) Forest plot comparing the performance of RDTs and uRDTs in terms of Accuracy, Area under the curve, Negative and Positive predicted values, Sensitivity, and Specificity.</p>
+
+###Supplementary Figure 4
+```{r echo = FALSE, warning = FALSE, fig.width = 10, fig.height = 12, fig.align = "center"}
+SPlot4.performance_eaid
+```
+<p style="font-size:8pt; font-style:italic">**Supplementary Figure 4:** Performance of RDTs and uRDTs in detecting eaid hotspots using Criterion 4 (Incidence, A and B), 5 (HRP2, C and D)  and 6 (qPCR, E and F). A, C and E) ROC curve, solid black points represent the Sensitivity at a fixed specificity of 85%. B, D and F) Forest plot comparing the performance of RDTs and uRDTs in terms of Accuracy, Area under the curve, Negative and Positive predicted values, Sensitivity, and Specificity.</p>
+
+###Supplementary Figure 5
+```{r echo = FALSE, warning = FALSE, fig.width = 10, fig.height = 8, fig.align = "center"}
+SPlot5.performance_hhid
+```
+<p style="font-size:8pt; font-style:italic">**Supplementary Figure 5:** Performance of RDTs and uRDTs in detecting hhid hotspots using Criterion 3 (HRP2, A and B), and 4 (qPCR, C and D). A, and C) ROC curve, solid black points represent the Sensitivity and Specificity that maximize the Youden metric. B, and D) Forest plot comparing the performance of RDTs and uRDTs in terms of Accuracy, Area under the curve, Negative and Positive predicted values, Sensitivity, and Specificity.</p>
+
+
+###Supplementary Table 1
+```{r echo = FALSE}
+# Summary table with the number of iids, hhids, eaids and arms ----
+stbl1%>%
+  kable(col.names = c("Individuals", "Households", "Enumeration areas"),
+        align = "c",
+        caption = "Supplementary Table 1: Sample size")%>%
+  kable_styling(full_width = FALSE,
+                position = "center")
+```
+
+###Supplementary Table 2
+```{r echo = FALSE}
+# Summary table with the number of iids, hhids, eaids and arms ----
+stbl2  %>%
+  kable(align = "c",
+        caption = "Supplementary Table 2: screened iids and hhids per eaids")%>%
+  kable_styling(full_width = FALSE,
+                position = "center")
+```
+
+###Supplementary Table 3
+```{r echo = FALSE, message=FALSE}
+stbl3 %>%
+  kable(align = "c",
+        caption = "Supplementary Table 3: Number of infected individuals and housholds with infected individuals by test")%>%
+  kable_styling(full_width = FALSE,
+                position = "center")
+```
+
+###Supplementary Table 4
+```{r echo = FALSE, message=FALSE}
+stbl4 %>%
+  kable(align = "c",
+        caption = "Supplementary Table 4: summary metrics at eaid level")%>%
+  kable_styling(full_width = FALSE,
+                position = "center")
+```
+
+###Supplementary Table 5
+```{r echo = FALSE, message = FALSE,warning = FALSE}
+stbl5%>%filter(comparison == "uRDT-RDT"|
+                 comparison == "prev.uRDT-prev.RDT")%>%
+  select(-roc1,-roc2)%>%
+  kable(align = "c",
+        caption = "Supplementary Table 5: AUC comparisons between uRDTs and RDTs")%>%
+  kable_styling(full_width = FALSE,
+                position = "center")
+
+```
+
+###Supplementary Table 6
+```{r echo = FALSE, message=FALSE}
+stbl6%>%
+  DT::datatable(caption = "Supplementary Table 6: AUCs, accuracy, npv, ppv, sensitivity, specificity, and optimal threshold for the different metrics and tests used as predictors for hostpots",
+                rownames = FALSE,
+                filter = "top",
+                extensions = 'Buttons', options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'pdf', 'print')))
+```
+
+###Supplementary Table 7
+```{r echo = FALSE, message=FALSE}
+stbl7%>%
+  DT::datatable(caption = "Supplementary Table 7: Agglomeration coefficient by distance and agglomeration clustering method",
+                rownames = FALSE,
+                filter = "top",
+                extensions = 'Buttons', options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'pdf', 'print')))
+```
+
+
+###Supplementary Table 8
+```{r echo = FALSE, message = FALSE,warning = FALSE}
+stbl8%>%
+  kable(align = "c",
+        caption = "Supplementary Table 8: number of infected iid per hhid, and total number of hhids with infected iids")%>%
+  kable_styling(full_width = FALSE,
+                position = "center")
+
+```
+
+
+```{r include = FALSE}
+iid_df%>%
+  DT::datatable(caption = "Supplementary Table 8: Long format iid data frame",rownames = FALSE,
+                filter = "top",
+                extensions = 'Buttons', options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'pdf', 'print')))
+```
+
+```{r include = FALSE}
+hhid_wdf%>%
+  DT::datatable(caption = "Supplementary Table 9: Wide format hhid data frame",rownames = FALSE,
+                filter = "top",
+                extensions = 'Buttons', options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'pdf', 'print')))
+```
+
+```{r include = FALSE}
+eaid_df%>%
+  DT::datatable(caption = "Supplementary Table 10: Wide format eaid data frame",rownames = FALSE,
+                filter = "top",
+                extensions = 'Buttons', options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'pdf', 'print')))
+```
+
